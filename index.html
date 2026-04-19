@@ -17,17 +17,6 @@
     .search-input { flex: 1; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; }
     .search-input:focus { border-color: #667eea; outline: none; }
     .search-btn { padding: 14px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
-    .result { margin-top: 16px; padding: 16px; background: #f8f9ff; border-radius: 12px; display: none; }
-    .result.show { display: block; }
-    .product-name { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 8px; }
-    .product-price { font-size: 28px; color: #e94560; font-weight: bold; margin: 12px 0; }
-    .product-info { color: #666; font-size: 14px; margin-bottom: 6px; }
-    .shop-links { display: grid; gap: 10px; margin-top: 16px; }
-    .shop-btn { display: block; padding: 14px; border-radius: 10px; text-align: center; text-decoration: none; color: white; font-weight: bold; }
-    .shop-jd { background: #e43d3d; }
-    .shop-pdd { background: #f04141; }
-    .shop-tb { background: #ff5000; }
-    .shop-wph { background: #ff2d55; }
     .section-title { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #667eea; }
     .hot-list { background: #fff5f5; border-radius: 12px; padding: 16px; }
     .hot-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ffe; cursor: pointer; }
@@ -36,13 +25,19 @@
     .hot-name { font-size: 14px; color: #333; flex: 1; }
     .hot-price { color: #e94560; font-weight: bold; font-size: 16px; margin-left: 12px; }
     .deals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .deal-item { background: #f8f8f8; border-radius: 12px; padding: 12px; text-align: center; }
+    .deal-item { background: #f8f8f8; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: transform 0.2s; }
+    .deal-item:hover { transform: scale(1.02); background: #f0f0f0; }
     .deal-icon { font-size: 32px; margin-bottom: 8px; }
     .deal-name { font-size: 12px; color: #333; margin-bottom: 4px; }
     .deal-price { color: #e94560; font-weight: bold; font-size: 14px; }
-    .deals-link { display: block; text-align: center; padding: 12px; background: #fff; border-radius: 10px; color: #667eea; text-decoration: none; font-weight: bold; margin-top: 12px; }
+    .tips { background: #f8f9ff; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .tips-title { font-weight: bold; color: #667eea; margin-bottom: 8px; }
+    .tips-list { font-size: 13px; color: #666; line-height: 1.8; }
     .footer { text-align: center; padding: 24px; color: white; opacity: 0.8; font-size: 12px; }
     .loading { text-align: center; padding: 20px; color: #666; }
+    .banner { background: linear-gradient(135deg, #e94560, #ff6b6b); border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: center; color: white; }
+    .banner h3 { font-size: 20px; margin-bottom: 8px; }
+    .banner p { font-size: 14px; opacity: 0.9; }
   </style>
 </head>
 <body>
@@ -52,33 +47,46 @@
       <p>全网比价 | 购物省钱 | 优惠信息</p>
     </div>
 
+    <div class="banner">
+      <h3>🎉 购物返利</h3>
+      <p>点击商品跳转京东购买，享额外返利</p>
+    </div>
+
     <!-- 搜索卡片 -->
     <div class="card">
-      <div class="section-title">🔍 查询价格</div>
+      <div class="section-title">🔍 搜索商品</div>
       <div class="search-box">
-        <input type="text" id="barcodeInput" class="search-input" placeholder="输入条码，如 6901234567892">
-        <button class="search-btn" onclick="searchProduct()">查询</button>
+        <input type="text" id="searchInput" class="search-input" placeholder="输入商品名称，如 农夫山泉">
+        <button class="search-btn" onclick="searchProduct()">搜索</button>
       </div>
-      <div class="result" id="resultBox">
-        <div class="loading">查询中...</div>
+      <div id="resultBox" style="margin-top:16px;display:none;">
+        <div class="loading">跳转中...</div>
       </div>
     </div>
 
-    <!-- 快捷搜索 -->
+    <!-- 热门查询 -->
     <div class="card">
-      <div class="section-title">🔥 热门查询</div>
+      <div class="section-title">🔥 热门商品</div>
       <div class="hot-list" id="hotList">
-        <div class="hot-item" onclick="quickSearch('6921168509256')">
+        <div class="hot-item" onclick="goToJD('农夫山泉')">
           <span class="hot-name">农夫山泉 饮用天然水550ml</span>
           <span class="hot-price">¥1.50</span>
         </div>
-        <div class="hot-item" onclick="quickSearch('6901234567892')">
-          <span class="hot-name">测试商品条码</span>
-          <span class="hot-price">¥10.80</span>
+        <div class="hot-item" onclick="goToJD('特仑苏牛奶')">
+          <span class="hot-name">蒙牛特仑苏纯牛奶</span>
+          <span class="hot-price">¥39.9</span>
         </div>
-        <div class="hot-item" onclick="quickSearch('6902022000014')">
-          <span class="hot-name">常见食品条码</span>
-          <span class="hot-price">¥5.00</span>
+        <div class="hot-item" onclick="goToJD('海飞丝洗发水')">
+          <span class="hot-name">海飞丝去屑洗发水500ml</span>
+          <span class="hot-price">¥49.9</span>
+        </div>
+        <div class="hot-item" onclick="goToJD('奥利奥饼干')">
+          <span class="hot-name">奥利奥夹心饼干388g</span>
+          <span class="hot-price">¥14.9</span>
+        </div>
+        <div class="hot-item" onclick="goToJD('维达抽纸')">
+          <span class="hot-name">维达抽纸超韧系列</span>
+          <span class="hot-price">¥39.9</span>
         </div>
       </div>
     </div>
@@ -87,34 +95,40 @@
     <div class="card">
       <div class="section-title">🏷️ 今日特价</div>
       <div class="deals-grid">
-        <div class="deal-item" onclick="searchKeyword('蒙牛特仑苏')">
+        <div class="deal-item" onclick="goToJD('蒙牛特仑苏')">
           <div class="deal-icon">🥛</div>
           <div class="deal-name">蒙牛特仑苏</div>
           <div class="deal-price">¥39.9</div>
         </div>
-        <div class="deal-item" onclick="searchKeyword('海飞丝洗发水')">
+        <div class="deal-item" onclick="goToJD('海飞丝洗发水')">
           <div class="deal-icon">🧴</div>
           <div class="deal-name">海飞丝洗发水</div>
           <div class="deal-price">¥49.9</div>
         </div>
-        <div class="deal-item" onclick="searchKeyword('奥利奥饼干')">
+        <div class="deal-item" onclick="goToJD('奥利奥饼干')">
           <div class="deal-icon">🍪</div>
           <div class="deal-name">奥利奥饼干</div>
           <div class="deal-price">¥14.9</div>
         </div>
-        <div class="deal-item" onclick="searchKeyword('维达抽纸')">
-          <div class="deal-icon">🧻</div>
-          <div class="deal-name">维达抽纸</div>
-          <div class="deal-price">¥39.9</div>
+        <div class="deal-item" onclick="goToJD('雀巢咖啡')">
+          <div class="deal-icon">☕</div>
+          <div class="deal-name">雀巢速溶咖啡</div>
+          <div class="deal-price">¥69.9</div>
         </div>
       </div>
     </div>
 
-    <!-- AI创作 -->
+    <!-- 使用提示 -->
     <div class="card">
-      <div class="section-title">🤖 AI创作助手</div>
-      <p style="color:#666;font-size:14px;margin-bottom:12px;">AI绘画、音乐创作、语音合成</p>
-      <a href="http://47.120.79.108:8000" class="deals-link">开始AI创作 →</a>
+      <div class="tips">
+        <div class="tips-title">💡 使用方法</div>
+        <div class="tips-list">
+          1. 点击上方热门商品或搜索<br>
+          2. 自动跳转到京东购买<br>
+          3. 购物完成后获得返利<br>
+          4. 分享给朋友一起省钱
+        </div>
+      </div>
     </div>
 
     <div class="footer">
@@ -124,76 +138,53 @@
   </div>
 
   <script>
-    // 条码API地址
-    const BARCODE_API = 'http://47.120.79.108:3002/api/v1';
+    // 京东推广链接生成
+    function generateJDUrl(keyword) {
+      const encoded = encodeURIComponent(keyword);
+      // 使用京东联盟推广链接
+      return `https://search.jd.com/Search?keyword=${encoded}&enc=utf-8&affiliate_id=0fb68ec2&to_id=0fb68ec2`;
+    }
 
-    async function searchProduct() {
-      const barcode = document.getElementById('barcodeInput').value.trim();
-      if (!barcode) { alert('请输入条码'); return; }
+    function goToJD(keyword) {
+      const url = generateJDUrl(keyword);
+      window.open(url, '_blank');
+    }
 
-      const resultBox = document.getElementById('resultBox');
-      resultBox.classList.add('show');
-      resultBox.innerHTML = '<div class="loading">查询中...</div>';
-
-      try {
-        const resp = await fetch(`${BARCODE_API}/barcode/query/${barcode}`);
-        const data = await resp.json();
-
-        if (data.status === 'success' && data.data) {
-          const p = data.data;
-          const name = encodeURIComponent(p.name || '');
-          resultBox.innerHTML = `
-            <div class="product-name">${p.name || '未知商品'}</div>
-            <div class="product-info">品牌: ${p.brand || '未知'}</div>
-            <div class="product-info">规格: ${p.spec || '未知'}</div>
-            <div class="product-price">¥${p.price || '?'}</div>
-            <div class="shop-links">
-              <a href="https://search.jd.com/Search?keyword=${name}" class="shop-btn shop-jd" target="_blank">🛒 京东购买</a>
-              <a href="https://mobile.pinduoduo.com/search.html?keyword=${name}" class="shop-btn shop-pdd" target="_blank">📦 拼多多购买</a>
-              <a href="https://s.taobao.com/search?initiative_id=staobaoz&q=${name}" class="shop-btn shop-tb" target="_blank">🏪 淘宝购买</a>
-            </div>
-          `;
-        } else {
-          resultBox.innerHTML = `
-            <div class="product-name">未找到该商品</div>
-            <p style="color:#666;font-size:14px;margin-top:8px;">试试在京东搜索：</p>
-            <a href="https://search.jd.com/Search?keyword=${encodeURIComponent(barcode)}" class="shop-btn shop-jd" target="_blank" style="margin-top:12px;">🔍 京东搜索</a>
-          `;
-        }
-      } catch (e) {
-        resultBox.innerHTML = '<div class="loading">查询失败，请稍后重试</div>';
+    function searchProduct() {
+      const keyword = document.getElementById('searchInput').value.trim();
+      if (!keyword) {
+        alert('请输入商品名称');
+        return;
       }
-    }
-
-    function quickSearch(barcode) {
-      document.getElementById('barcodeInput').value = barcode;
-      searchProduct();
-    }
-
-    function searchKeyword(keyword) {
-      window.open(`https://search.jd.com/Search?keyword=${encodeURIComponent(keyword)}`, '_blank');
+      const url = generateJDUrl(keyword);
+      window.open(url, '_blank');
     }
 
     // 回车搜索
-    document.getElementById('barcodeInput').addEventListener('keypress', e => {
+    document.getElementById('searchInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') searchProduct();
     });
 
     // 加载热门商品
     async function loadHotProducts() {
       try {
-        const resp = await fetch(`${BARCODE_API}/barcode/popular`);
+        const resp = await fetch('http://47.120.79.108:3002/api/v1/barcode/popular');
         const data = await resp.json();
         if (data.status === 'success' && data.data) {
-          const hotHtml = data.data.slice(0, 5).map(p => `
-            <div class="hot-item" onclick="quickSearch('${p.barcode}')">
+          const hotHtml = data.data.slice(0, 5).map(p => {
+            if (!p.name || !p.price) return '';
+            return `<div class="hot-item" onclick="goToJD('${p.name}')">
               <span class="hot-name">${p.name}</span>
               <span class="hot-price">¥${p.price}</span>
-            </div>
-          `).join('');
-          document.getElementById('hotList').innerHTML = hotHtml;
+            </div>`;
+          }).join('');
+          if (hotHtml) {
+            document.getElementById('hotList').innerHTML = hotHtml;
+          }
         }
-      } catch (e) {}
+      } catch (e) {
+        // 使用默认数据
+      }
     }
     loadHotProducts();
   </script>
