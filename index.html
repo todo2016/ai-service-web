@@ -111,23 +111,23 @@
     <div class="card">
       <div class="section-title">🔥 热门商品 (VIP免费查)</div>
       <div class="hot-list">
-        <div class="hot-item" onclick="goToJD('农夫山泉')">
+        <div class="hot-item" onclick="goToProduct('https://item.jd.com/10200152883.html')">
           <span class="hot-name">农夫山泉 饮用天然水550ml</span>
           <span class="hot-price">¥1.50</span>
         </div>
-        <div class="hot-item" onclick="goToJD('特仑苏牛奶')">
+        <div class="hot-item" onclick="goToProduct('https://item.jd.com/100037033.html')">
           <span class="hot-name">蒙牛特仑苏纯牛奶</span>
           <span class="hot-price">¥39.9</span>
         </div>
-        <div class="hot-item" onclick="goToJD('海飞丝洗发水')">
+        <div class="hot-item" onclick="goToProduct('https://item.jd.com/1000001777.html')">
           <span class="hot-name">海飞丝去屑洗发水500ml</span>
           <span class="hot-price">¥49.9</span>
         </div>
-        <div class="hot-item" onclick="goToJD('奥利奥饼干')">
+        <div class="hot-item" onclick="goToProduct('https://item.jd.com/1000007731.html')">
           <span class="hot-name">奥利奥夹心饼干388g</span>
           <span class="hot-price">¥14.9</span>
         </div>
-        <div class="hot-item" onclick="goToJD('维达抽纸')">
+        <div class="hot-item" onclick="goToProduct('https://item.jd.com/1000008101.html')">
           <span class="hot-name">维达抽纸超韧系列</span>
           <span class="hot-price">¥39.9</span>
         </div>
@@ -221,11 +221,19 @@
 
     function goToJD(keyword) {
       if (selectedPlan === 'free') {
-        // 免费用户限制
         alert('免费用户每天只能查询3次\n升级VIP解锁无限查询!');
         return;
       }
       const url = generateJDUrl(keyword);
+      window.open(url, '_blank');
+    }
+
+    function goToProduct(url) {
+      if (selectedPlan === 'free') {
+        alert('免费用户每天只能查询3次\n升级VIP解锁无限查询!');
+        return;
+      }
+      // 转换并跳转
       window.open(url, '_blank');
     }
 
