@@ -3,75 +3,108 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevKit App - 开发工具集合</title>
+  <title>扫码查价 - 全网最低价 | 省钱利器</title>
+  <meta name="description" content="扫码查价格，全网比价，购物省钱利器！支持京东、淘宝、拼多多比价。">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0f0f23; color: #fff; min-height: 100vh; }
-    .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
-    .header { text-align: center; padding: 60px 0; }
-    .header h1 { font-size: 48px; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
-    .header p { color: #888; font-size: 18px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 40px 0; }
-    .card { background: #1a1a3e; border-radius: 16px; padding: 30px; transition: transform 0.3s; }
-    .card:hover { transform: translateY(-5px); }
-    .card-icon { font-size: 48px; margin-bottom: 15px; }
-    .card-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
-    .card-desc { color: #888; font-size: 14px; margin-bottom: 15px; }
-    .card-link { display: inline-block; padding: 10px 20px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-size: 14px; }
-    .footer { text-align: center; padding: 40px; color: #666; font-size: 14px; }
-    .sub { max-width: 600px; margin: 0 auto; text-align: center; }
-    .sub h2 { font-size: 24px; margin-bottom: 15px; }
-    .sub-links { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-    .sub-link { padding: 12px 24px; background: #1a1a3e; border-radius: 8px; color: #667eea; text-decoration: none; }
-    .sub-link:hover { background: #2a2a4e; }
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { text-align: center; padding: 40px 0; color: white; }
+    .header h1 { font-size: 36px; margin-bottom: 10px; }
+    .header p { font-size: 18px; opacity: 0.9; }
+    .card { background: white; border-radius: 20px; padding: 30px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
+    .card-icon { font-size: 60px; text-align: center; margin-bottom: 15px; }
+    .card-title { font-size: 24px; font-weight: bold; text-align: center; color: #333; margin-bottom: 10px; }
+    .card-desc { text-align: center; color: #666; margin-bottom: 20px; }
+    .btn { display: block; width: 100%; padding: 18px; background: linear-gradient(135deg, #e94560, #ff6b6b); color: white; text-align: center; text-decoration: none; border-radius: 12px; font-size: 18px; font-weight: bold; margin-bottom: 12px; }
+    .btn-secondary { background: #1a1a3e; }
+    .btn:active { transform: scale(0.98); }
+    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
+    .feature { background: #f8f8f8; padding: 15px; border-radius: 12px; text-align: center; }
+    .feature-icon { font-size: 24px; margin-bottom: 5px; }
+    .feature-text { font-size: 12px; color: #666; }
+    .footer { text-align: center; padding: 30px; color: white; opacity: 0.8; font-size: 14px; }
+    .stats { display: flex; justify-content: space-around; margin: 20px 0; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 28px; font-weight: bold; color: #e94560; }
+    .stat-label { font-size: 12px; color: #666; }
+    .hot { background: #fff5f5; border-radius: 12px; padding: 15px; margin: 15px 0; }
+    .hot-title { font-weight: bold; color: #e94560; margin-bottom: 10px; }
+    .hot-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ffe; }
+    .hot-item:last-child { border-bottom: none; }
+    .hot-price { color: #e94560; font-weight: bold; }
+    .qr { text-align: center; padding: 20px; background: #f8f8f8; border-radius: 12px; margin: 15px 0; }
+    .qr-hint { font-size: 12px; color: #666; margin-top: 10px; }
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <h1>DevKit App</h1>
-      <p>开发工具集合 - 让开发更简单</p>
+      <h1>📷 扫码查价</h1>
+      <p>全网比价 | 购物省钱 | 优惠信息</p>
     </div>
 
-    <div class="sub">
-      <h2>🚀 热门工具</h2>
-      <div class="sub-links">
-        <a href="https://47.120.79.108:3006" class="sub-link">📷 条码查询</a>
-        <a href="https://47.120.79.108:3008" class="sub-link">🏷️ 今日特价</a>
-        <a href="https://47.120.79.108:3009" class="sub-link">📚 条码知识</a>
+    <div class="card">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">查价格</div>
+      <div class="card-desc">输入商品条码，立即查询全网最低价</div>
+      <a href="http://47.120.79.108:3006" class="btn">📷 扫码查价格</a>
+      <a href="http://47.120.79.108:3009" class="btn btn-secondary">📚 条码知识</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🏷️</div>
+      <div class="card-title">今日特价</div>
+      <div class="card-desc">精选优惠商品，点击直接购买</div>
+      <a href="http://47.120.79.108:3008" class="btn">🔥 查看特价商品</a>
+    </div>
+
+    <div class="card">
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-num">1000+</div>
+          <div class="stat-label">商品数据</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">5</div>
+          <div class="stat-label">电商平台</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">查询费用</div>
+        </div>
       </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="card-icon">📷</div>
-        <div class="card-title">条码查询</div>
-        <div class="card-desc">扫码查价格，全网比价省钱</div>
-        <a href="https://47.120.79.108:3006" class="card-link">立即使用</a>
+    <div class="card">
+      <div class="card-title">🔥 热门查询</div>
+      <div class="hot">
+        <div class="hot-item">
+          <span>农夫山泉 饮用天然水550ml</span>
+          <span class="hot-price">¥1.50</span>
+        </div>
+        <div class="hot-item">
+          <span>蒙牛特仑苏纯牛奶</span>
+          <span class="hot-price">¥39.9</span>
+        </div>
+        <div class="hot-item">
+          <span>海飞丝去屑洗发水</span>
+          <span class="hot-price">¥49.9</span>
+        </div>
       </div>
-      <div class="card">
-        <div class="card-icon">🏷️</div>
-        <div class="card-title">今日特价</div>
-        <div class="card-desc">精选优惠商品，省钱购物</div>
-        <a href="https://47.120.79.108:3008" class="card-link">查看特价</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">🤖</div>
-        <div class="card-title">AI 创作</div>
-        <div class="card-desc">AI绘画、音乐、语音合成</div>
-        <a href="https://47.120.79.108:8000" class="card-link">开始创作</a>
-      </div>
-      <div class="card">
-        <div class="card-icon">📚</div>
-        <div class="card-title">条码知识</div>
-        <div class="card-desc">了解条码查询相关知识</div>
-        <a href="https://47.120.79.108:3009" class="card-link">阅读更多</a>
-      </div>
+      <a href="http://47.120.79.108:3006" class="btn">查看全部 →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">AI 创作助手</div>
+      <div class="card-desc">AI绘画、音乐创作、语音合成</div>
+      <a href="http://47.120.79.108:8000" class="btn btn-secondary">开始创作</a>
     </div>
 
     <div class="footer">
-      <p>DevKit App © 2024</p>
-      <p style="margin-top:10px;">让开发更简单 · 让生活更便利</p>
+      <p>📷 扫码查价 - 让购物更省钱</p>
+      <p style="margin-top:10px;">合作平台: 京东 | 淘宝 | 拼多多 | 唯品会</p>
     </div>
   </div>
 </body>
