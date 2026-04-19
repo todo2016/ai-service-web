@@ -38,6 +38,9 @@
     .banner { background: linear-gradient(135deg, #e94560, #ff6b6b); border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: center; color: white; }
     .banner h3 { font-size: 20px; margin-bottom: 8px; }
     .banner p { font-size: 14px; opacity: 0.9; }
+    .share-btn { display: inline-block; padding: 10px 20px; background: #07c160; color: white; border-radius: 8px; cursor: pointer; margin: 5px; font-size: 14px; }
+    .share-btn:hover { background: #06ad56; }
+    .share-area { text-align: center; margin-top: 12px; }
   </style>
 </head>
 <body>
@@ -131,6 +134,18 @@
       </div>
     </div>
 
+    <!-- 分享 -->
+    <div class="card">
+      <div class="section-title">📢 分享赚钱</div>
+      <p style="color:#666;font-size:14px;margin-bottom:12px;">分享给朋友，他们购物你赚佣金</p>
+      <div class="share-area">
+        <span class="share-btn" onclick="shareToWechat()">💚 微信分享</span>
+        <span class="share-btn" onclick="shareToWeibo()">📱 微博分享</span>
+        <span class="share-btn" onclick="copyLink()">📋 复制链接</span>
+      </div>
+      <p id="copyTip" style="color:#07c160;font-size:12px;margin-top:10px;display:none;">✅ 链接已复制，快去分享!</p>
+    </div>
+
     <div class="footer">
       <p>📷 扫码查价 - 让购物更省钱</p>
       <p style="margin-top:6px;">合作平台: 京东 | 淘宝 | 拼多多 | 唯品会</p>
@@ -164,6 +179,29 @@
     document.getElementById('searchInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') searchProduct();
     });
+
+    // 分享功能
+    function shareToWechat() {
+      alert('点击右上角分享到微信');
+    }
+
+    function shareToWeibo() {
+      const text = '我在用扫码查价，全网比价购物省钱，分享给大家!';
+      const url = encodeURIComponent('https://www.devkitapp.com');
+      window.open(`https://service.weibo.com/share/share.php?title=${text}&url=${url}`, '_blank');
+    }
+
+    function copyLink() {
+      const url = 'https://www.devkitapp.com';
+      navigator.clipboard.writeText(url).then(() => {
+        document.getElementById('copyTip').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('copyTip').style.display = 'none';
+        }, 3000);
+      }).catch(() => {
+        alert('复制成功: ' + url);
+      });
+    }
 
     // 加载热门商品
     async function loadHotProducts() {
