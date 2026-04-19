@@ -46,6 +46,14 @@
     .tips-list { font-size: 13px; color: #666; line-height: 1.8; }
     .footer { text-align: center; padding: 24px; color: white; opacity: 0.8; font-size: 12px; }
     .vip-badge { background: #ffd700; color: #333; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px; }
+    .urgency-bar { background: linear-gradient(90deg, #ff6b6b, #e94560); color: white; text-align: center; padding: 8px; font-size: 13px; border-radius: 8px; margin-bottom: 12px; }
+    .social-proof { background: #fff5f5; border-radius: 8px; padding: 10px 12px; font-size: 12px; color: #666; margin-bottom: 12px; }
+    .social-proof span { color: #e94560; font-weight: bold; }
+    .countdown { color: #ff6b6b; font-weight: bold; }
+    .price-highlight { background: linear-gradient(135deg, #e94560, #ff6b6b); color: white; padding: 12px; border-radius: 12px; text-align: center; margin-bottom: 12px; }
+    .price-highlight .amount { font-size: 36px; font-weight: bold; }
+    .price-highlight .original { text-decoration: line-through; opacity: 0.7; font-size: 14px; }
+    .cta-fixed { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(135deg, #07c160, #05a050); color: white; padding: 14px; text-align: center; font-size: 16px; font-weight: bold; z-index: 50; cursor: pointer; box-shadow: 0 -4px 20px rgba(0,0,0,0.2); }
   </style>
 </head>
 <body>
@@ -57,7 +65,9 @@
 
     <!-- 定价卡片 -->
     <div class="card">
-      <div class="section-title">💰 选择套餐 (今日特价)</div>
+      <div class="urgency-bar">🔥 今日特价：前50名购买立减 ¥3，仅剩 <span id="remaining" class="countdown">47</span> 名</div>
+      <div class="social-proof">👑 <span>127</span> 人正在使用本服务 | ⏰ 今日已有 <span>38</span> 人开通VIP</div>
+      <div class="section-title">💰 选择套餐</div>
       <div class="plans">
         <div class="plan" onclick="selectPlan('free')">
           <div class="plan-icon">🆓</div>
@@ -84,7 +94,17 @@
           <div class="plan-price">¥99<span style="font-size:12px;font-weight:normal;color:#999">/月</span></div>
         </div>
       </div>
-      <button class="pay-btn" onclick="showPay()">👆 立即开通</button>
+      <div class="price-highlight">
+        <div>VIP会员首发价</div>
+        <div class="amount">¥9.9<span style="font-size:14px">/月</span></div>
+        <div class="original">原价 ¥29.9/月</div>
+      </div>
+      <button class="pay-btn" onclick="showPay()">👆 立即开通 ¥9.9</button>
+    </div>
+
+    <!-- 浮动CTA -->
+    <div class="cta-fixed" onclick="document.querySelector('.pay-btn').click()">
+      🎉 开通VIP · 无限查价 · 立即省钱
     </div>
 
     <!-- 热门查询 -->
@@ -227,6 +247,15 @@
     document.getElementById('searchInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') searchProduct();
     });
+
+    // 倒计时剩余名额
+    let remaining = 47;
+    setInterval(() => {
+      if (remaining > 5) {
+        remaining--;
+        document.getElementById('remaining').textContent = remaining;
+      }
+    }, 30000);
   </script>
 </body>
 </html>
