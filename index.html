@@ -13,9 +13,9 @@
     .header h1 { font-size: 32px; margin-bottom: 8px; }
     .header p { font-size: 16px; opacity: 0.9; }
     .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .price-tag { background: linear-gradient(135deg, #e94560, #ff6b6b); color: white; padding: 8px 16px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 12px; }
     .search-box { display: flex; gap: 10px; }
     .search-input { flex: 1; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; }
-    .search-input:focus { border-color: #667eea; outline: none; }
     .search-btn { padding: 14px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
     .section-title { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #667eea; }
     .hot-list { background: #fff5f5; border-radius: 12px; padding: 16px; }
@@ -24,23 +24,28 @@
     .hot-item:hover { background: #fff; margin: 0 -10px; padding: 10px; border-radius: 8px; }
     .hot-name { font-size: 14px; color: #333; flex: 1; }
     .hot-price { color: #e94560; font-weight: bold; font-size: 16px; margin-left: 12px; }
-    .deals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .deal-item { background: #f8f8f8; border-radius: 12px; padding: 12px; text-align: center; cursor: pointer; transition: transform 0.2s; }
-    .deal-item:hover { transform: scale(1.02); background: #f0f0f0; }
-    .deal-icon { font-size: 32px; margin-bottom: 8px; }
-    .deal-name { font-size: 12px; color: #333; margin-bottom: 4px; }
-    .deal-price { color: #e94560; font-weight: bold; font-size: 14px; }
-    .tips { background: #f8f9ff; border-radius: 12px; padding: 16px; margin-top: 16px; }
-    .tips-title { font-weight: bold; color: #667eea; margin-bottom: 8px; }
+    .plans { display: grid; gap: 12px; }
+    .plan { display: flex; align-items: center; padding: 16px; border: 2px solid #eee; border-radius: 12px; cursor: pointer; transition: all 0.2s; }
+    .plan:hover { border-color: #667eea; background: #f8f9ff; }
+    .plan.selected { border-color: #667eea; background: #f0f0ff; }
+    .plan-icon { font-size: 32px; margin-right: 12px; }
+    .plan-info { flex: 1; }
+    .plan-name { font-weight: bold; color: #333; }
+    .plan-desc { font-size: 12px; color: #666; }
+    .plan-price { font-size: 24px; font-weight: bold; color: #e94560; }
+    .plan-price small { font-size: 12px; color: #999; font-weight: normal; }
+    .pay-btn { display: block; width: 100%; padding: 16px; background: linear-gradient(135deg, #07c160, #05a050); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 16px; }
+    .pay-btn:hover { background: linear-gradient(135deg, #05a050, #038c40); }
+    .contact-box { background: #f8f9ff; border-radius: 12px; padding: 20px; text-align: center; }
+    .contact-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #eee; }
+    .contact-item:last-child { border-bottom: none; }
+    .contact-icon { font-size: 24px; margin-right: 12px; }
+    .contact-text { color: #333; font-size: 14px; }
+    .tips { background: #fff5f5; border-radius: 12px; padding: 16px; margin-top: 16px; }
+    .tips-title { font-weight: bold; color: #e94560; margin-bottom: 8px; }
     .tips-list { font-size: 13px; color: #666; line-height: 1.8; }
     .footer { text-align: center; padding: 24px; color: white; opacity: 0.8; font-size: 12px; }
-    .loading { text-align: center; padding: 20px; color: #666; }
-    .banner { background: linear-gradient(135deg, #e94560, #ff6b6b); border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: center; color: white; }
-    .banner h3 { font-size: 20px; margin-bottom: 8px; }
-    .banner p { font-size: 14px; opacity: 0.9; }
-    .share-btn { display: inline-block; padding: 10px 20px; background: #07c160; color: white; border-radius: 8px; cursor: pointer; margin: 5px; font-size: 14px; }
-    .share-btn:hover { background: #06ad56; }
-    .share-area { text-align: center; margin-top: 12px; }
+    .vip-badge { background: #ffd700; color: #333; padding: 2px 8px; border-radius: 4px; font-size: 10px; margin-left: 8px; }
   </style>
 </head>
 <body>
@@ -50,27 +55,42 @@
       <p>全网比价 | 购物省钱 | 优惠信息</p>
     </div>
 
-    <div class="banner">
-      <h3>🎉 购物返利</h3>
-      <p>点击商品跳转京东购买，享额外返利</p>
-    </div>
-
-    <!-- 搜索卡片 -->
+    <!-- 定价卡片 -->
     <div class="card">
-      <div class="section-title">🔍 搜索商品</div>
-      <div class="search-box">
-        <input type="text" id="searchInput" class="search-input" placeholder="输入商品名称，如 农夫山泉">
-        <button class="search-btn" onclick="searchProduct()">搜索</button>
+      <div class="section-title">💰 选择套餐 (今日特价)</div>
+      <div class="plans">
+        <div class="plan" onclick="selectPlan('free')">
+          <div class="plan-icon">🆓</div>
+          <div class="plan-info">
+            <div class="plan-name">免费体验</div>
+            <div class="plan-desc">每天3次查询</div>
+          </div>
+          <div class="plan-price">¥0</div>
+        </div>
+        <div class="plan selected" onclick="selectPlan('vip')">
+          <div class="plan-icon">👑</div>
+          <div class="plan-info">
+            <div class="plan-name">VIP会员 <span class="vip-badge">推荐</span></div>
+            <div class="plan-desc">无限查询 + 专属推荐 + 更高返利</div>
+          </div>
+          <div class="plan-price">¥9.9<span style="font-size:12px;font-weight:normal;color:#999">/月</span></div>
+        </div>
+        <div class="plan" onclick="selectPlan('agent')">
+          <div class="plan-icon">🤝</div>
+          <div class="plan-info">
+            <div class="plan-name">代理推广</div>
+            <div class="plan-desc">专属推广链接 + 佣金加倍 + 专属客服</div>
+          </div>
+          <div class="plan-price">¥99<span style="font-size:12px;font-weight:normal;color:#999">/月</span></div>
+        </div>
       </div>
-      <div id="resultBox" style="margin-top:16px;display:none;">
-        <div class="loading">跳转中...</div>
-      </div>
+      <button class="pay-btn" onclick="showPay()">👆 立即开通</button>
     </div>
 
     <!-- 热门查询 -->
     <div class="card">
-      <div class="section-title">🔥 热门商品</div>
-      <div class="hot-list" id="hotList">
+      <div class="section-title">🔥 热门商品 (VIP免费查)</div>
+      <div class="hot-list">
         <div class="hot-item" onclick="goToJD('农夫山泉')">
           <span class="hot-name">农夫山泉 饮用天然水550ml</span>
           <span class="hot-price">¥1.50</span>
@@ -94,29 +114,31 @@
       </div>
     </div>
 
-    <!-- 今日特价 -->
+    <!-- 搜索 -->
     <div class="card">
-      <div class="section-title">🏷️ 今日特价</div>
-      <div class="deals-grid">
-        <div class="deal-item" onclick="goToJD('蒙牛特仑苏')">
-          <div class="deal-icon">🥛</div>
-          <div class="deal-name">蒙牛特仑苏</div>
-          <div class="deal-price">¥39.9</div>
+      <div class="section-title">🔍 搜索商品</div>
+      <div class="search-box">
+        <input type="text" id="searchInput" class="search-input" placeholder="输入商品名称，如 农夫山泉">
+        <button class="search-btn" onclick="searchProduct()">搜索</button>
+      </div>
+    </div>
+
+    <!-- 联系/支付 -->
+    <div class="card">
+      <div class="section-title">📞 联系开通</div>
+      <div class="contact-box">
+        <p style="color:#666;font-size:14px;margin-bottom:16px;">扫码支付后联系客服开通VIP</p>
+        <div class="contact-item">
+          <span class="contact-icon">💬</span>
+          <span class="contact-text">客服微信: devkitapp</span>
         </div>
-        <div class="deal-item" onclick="goToJD('海飞丝洗发水')">
-          <div class="deal-icon">🧴</div>
-          <div class="deal-name">海飞丝洗发水</div>
-          <div class="deal-price">¥49.9</div>
+        <div class="contact-item">
+          <span class="contact-icon">📱</span>
+          <span class="contact-text">微信号: devkitapp (长按复制)</span>
         </div>
-        <div class="deal-item" onclick="goToJD('奥利奥饼干')">
-          <div class="deal-icon">🍪</div>
-          <div class="deal-name">奥利奥饼干</div>
-          <div class="deal-price">¥14.9</div>
-        </div>
-        <div class="deal-item" onclick="goToJD('雀巢咖啡')">
-          <div class="deal-icon">☕</div>
-          <div class="deal-name">雀巢速溶咖啡</div>
-          <div class="deal-price">¥69.9</div>
+        <div class="contact-item">
+          <span class="contact-icon">📧</span>
+          <span class="contact-text">邮箱: contact@devkitapp.com</span>
         </div>
       </div>
     </div>
@@ -124,43 +146,65 @@
     <!-- 使用提示 -->
     <div class="card">
       <div class="tips">
-        <div class="tips-title">💡 使用方法</div>
+        <div class="tips-title">💡 为什么收费?</div>
         <div class="tips-list">
-          1. 点击上方热门商品或搜索<br>
-          2. 自动跳转到京东购买<br>
-          3. 购物完成后获得返利<br>
-          4. 分享给朋友一起省钱
+          1. 服务器和带宽需要成本<br>
+          2. 收费才能持续提供服务<br>
+          3. VIP用户获得更好体验和更高返利<br>
+          4. 付费用户是真正的目标用户
         </div>
       </div>
     </div>
 
-    <!-- 分享 -->
-    <div class="card">
-      <div class="section-title">📢 分享赚钱</div>
-      <p style="color:#666;font-size:14px;margin-bottom:12px;">分享给朋友，他们购物你赚佣金</p>
-      <div class="share-area">
-        <span class="share-btn" onclick="shareToWechat()">💚 微信分享</span>
-        <span class="share-btn" onclick="shareToWeibo()">📱 微博分享</span>
-        <span class="share-btn" onclick="copyLink()">📋 复制链接</span>
-      </div>
-      <p id="copyTip" style="color:#07c160;font-size:12px;margin-top:10px;display:none;">✅ 链接已复制，快去分享!</p>
-    </div>
-
     <div class="footer">
       <p>📷 扫码查价 - 让购物更省钱</p>
-      <p style="margin-top:6px;">合作平台: 京东 | 淘宝 | 拼多多 | 唯品会</p>
+      <p style="margin-top:6px;">正品保障 | 急速开通 | 7x24服务</p>
+    </div>
+  </div>
+
+  <!-- 支付弹窗 -->
+  <div id="payModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:100;align-items:center;justify-content:center;">
+    <div style="background:white;border-radius:16px;padding:30px;margin:20px;max-width:400px;text-align:center;">
+      <h3 style="margin-bottom:20px;">👑 开通VIP会员</h3>
+      <p style="color:#666;margin-bottom:20px;">¥9.9/月 无限查询+专属推荐</p>
+      <div style="background:#f8f9ff;padding:20px;border-radius:12px;margin-bottom:20px;">
+        <p style="font-size:14px;color:#666;margin-bottom:10px;">👈 加客服微信</p>
+        <p style="font-size:14px;color:#666;">👆 转账 ¥9.9</p>
+        <p style="font-size:14px;color:#666;margin-top:10px;">👑 开通VIP</p>
+      </div>
+      <button onclick="closePay()" style="padding:12px 30px;background:#999;color:white;border:none;border-radius:8px;cursor:pointer;">关闭</button>
     </div>
   </div>
 
   <script>
-    // 京东推广链接生成
+    let selectedPlan = 'vip';
+
+    function selectPlan(plan) {
+      selectedPlan = plan;
+      document.querySelectorAll('.plan').forEach(p => p.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+    }
+
+    function showPay() {
+      document.getElementById('payModal').style.display = 'flex';
+    }
+
+    function closePay() {
+      document.getElementById('payModal').style.display = 'none';
+    }
+
     function generateJDUrl(keyword) {
       const encoded = encodeURIComponent(keyword);
-      // 使用京东联盟推广链接
+      // 京东推广链接 - VIP用户返利更高
       return `https://search.jd.com/Search?keyword=${encoded}&enc=utf-8&affiliate_id=0fb68ec2&to_id=0fb68ec2`;
     }
 
     function goToJD(keyword) {
+      if (selectedPlan === 'free') {
+        // 免费用户限制
+        alert('免费用户每天只能查询3次\n升级VIP解锁无限查询!');
+        return;
+      }
       const url = generateJDUrl(keyword);
       window.open(url, '_blank');
     }
@@ -171,6 +215,10 @@
         alert('请输入商品名称');
         return;
       }
+      if (selectedPlan === 'free') {
+        alert('免费用户每天只能查询3次\n升级VIP解锁无限查询!');
+        return;
+      }
       const url = generateJDUrl(keyword);
       window.open(url, '_blank');
     }
@@ -179,52 +227,6 @@
     document.getElementById('searchInput').addEventListener('keypress', e => {
       if (e.key === 'Enter') searchProduct();
     });
-
-    // 分享功能
-    function shareToWechat() {
-      alert('点击右上角分享到微信');
-    }
-
-    function shareToWeibo() {
-      const text = '我在用扫码查价，全网比价购物省钱，分享给大家!';
-      const url = encodeURIComponent('https://www.devkitapp.com');
-      window.open(`https://service.weibo.com/share/share.php?title=${text}&url=${url}`, '_blank');
-    }
-
-    function copyLink() {
-      const url = 'https://www.devkitapp.com';
-      navigator.clipboard.writeText(url).then(() => {
-        document.getElementById('copyTip').style.display = 'block';
-        setTimeout(() => {
-          document.getElementById('copyTip').style.display = 'none';
-        }, 3000);
-      }).catch(() => {
-        alert('复制成功: ' + url);
-      });
-    }
-
-    // 加载热门商品
-    async function loadHotProducts() {
-      try {
-        const resp = await fetch('http://47.120.79.108:3002/api/v1/barcode/popular');
-        const data = await resp.json();
-        if (data.status === 'success' && data.data) {
-          const hotHtml = data.data.slice(0, 5).map(p => {
-            if (!p.name || !p.price) return '';
-            return `<div class="hot-item" onclick="goToJD('${p.name}')">
-              <span class="hot-name">${p.name}</span>
-              <span class="hot-price">¥${p.price}</span>
-            </div>`;
-          }).join('');
-          if (hotHtml) {
-            document.getElementById('hotList').innerHTML = hotHtml;
-          }
-        }
-      } catch (e) {
-        // 使用默认数据
-      }
-    }
-    loadHotProducts();
   </script>
 </body>
 </html>
