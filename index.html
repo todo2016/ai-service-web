@@ -9,32 +9,40 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { text-align: center; padding: 40px 0; color: white; }
-    .header h1 { font-size: 36px; margin-bottom: 10px; }
-    .header p { font-size: 18px; opacity: 0.9; }
-    .card { background: white; border-radius: 20px; padding: 30px; margin-bottom: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); }
-    .card-icon { font-size: 60px; text-align: center; margin-bottom: 15px; }
-    .card-title { font-size: 24px; font-weight: bold; text-align: center; color: #333; margin-bottom: 10px; }
-    .card-desc { text-align: center; color: #666; margin-bottom: 20px; }
-    .btn { display: block; width: 100%; padding: 18px; background: linear-gradient(135deg, #e94560, #ff6b6b); color: white; text-align: center; text-decoration: none; border-radius: 12px; font-size: 18px; font-weight: bold; margin-bottom: 12px; }
-    .btn-secondary { background: #1a1a3e; }
-    .btn:active { transform: scale(0.98); }
-    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin: 20px 0; }
-    .feature { background: #f8f8f8; padding: 15px; border-radius: 12px; text-align: center; }
-    .feature-icon { font-size: 24px; margin-bottom: 5px; }
-    .feature-text { font-size: 12px; color: #666; }
-    .footer { text-align: center; padding: 30px; color: white; opacity: 0.8; font-size: 14px; }
-    .stats { display: flex; justify-content: space-around; margin: 20px 0; }
-    .stat { text-align: center; }
-    .stat-num { font-size: 28px; font-weight: bold; color: #e94560; }
-    .stat-label { font-size: 12px; color: #666; }
-    .hot { background: #fff5f5; border-radius: 12px; padding: 15px; margin: 15px 0; }
-    .hot-title { font-weight: bold; color: #e94560; margin-bottom: 10px; }
-    .hot-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #ffe; }
+    .header { text-align: center; padding: 30px 0; color: white; }
+    .header h1 { font-size: 32px; margin-bottom: 8px; }
+    .header p { font-size: 16px; opacity: 0.9; }
+    .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); }
+    .search-box { display: flex; gap: 10px; }
+    .search-input { flex: 1; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-size: 16px; }
+    .search-input:focus { border-color: #667eea; outline: none; }
+    .search-btn { padding: 14px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; border-radius: 10px; font-size: 16px; cursor: pointer; }
+    .result { margin-top: 16px; padding: 16px; background: #f8f9ff; border-radius: 12px; display: none; }
+    .result.show { display: block; }
+    .product-name { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 8px; }
+    .product-price { font-size: 28px; color: #e94560; font-weight: bold; margin: 12px 0; }
+    .product-info { color: #666; font-size: 14px; margin-bottom: 6px; }
+    .shop-links { display: grid; gap: 10px; margin-top: 16px; }
+    .shop-btn { display: block; padding: 14px; border-radius: 10px; text-align: center; text-decoration: none; color: white; font-weight: bold; }
+    .shop-jd { background: #e43d3d; }
+    .shop-pdd { background: #f04141; }
+    .shop-tb { background: #ff5000; }
+    .shop-wph { background: #ff2d55; }
+    .section-title { font-size: 18px; font-weight: bold; color: #333; margin-bottom: 12px; padding-left: 12px; border-left: 4px solid #667eea; }
+    .hot-list { background: #fff5f5; border-radius: 12px; padding: 16px; }
+    .hot-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #ffe; cursor: pointer; }
     .hot-item:last-child { border-bottom: none; }
-    .hot-price { color: #e94560; font-weight: bold; }
-    .qr { text-align: center; padding: 20px; background: #f8f8f8; border-radius: 12px; margin: 15px 0; }
-    .qr-hint { font-size: 12px; color: #666; margin-top: 10px; }
+    .hot-item:hover { background: #fff; margin: 0 -10px; padding: 10px; border-radius: 8px; }
+    .hot-name { font-size: 14px; color: #333; flex: 1; }
+    .hot-price { color: #e94560; font-weight: bold; font-size: 16px; margin-left: 12px; }
+    .deals-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .deal-item { background: #f8f8f8; border-radius: 12px; padding: 12px; text-align: center; }
+    .deal-icon { font-size: 32px; margin-bottom: 8px; }
+    .deal-name { font-size: 12px; color: #333; margin-bottom: 4px; }
+    .deal-price { color: #e94560; font-weight: bold; font-size: 14px; }
+    .deals-link { display: block; text-align: center; padding: 12px; background: #fff; border-radius: 10px; color: #667eea; text-decoration: none; font-weight: bold; margin-top: 12px; }
+    .footer { text-align: center; padding: 24px; color: white; opacity: 0.8; font-size: 12px; }
+    .loading { text-align: center; padding: 20px; color: #666; }
   </style>
 </head>
 <body>
@@ -44,68 +52,150 @@
       <p>全网比价 | 购物省钱 | 优惠信息</p>
     </div>
 
+    <!-- 搜索卡片 -->
     <div class="card">
-      <div class="card-icon">🔍</div>
-      <div class="card-title">查价格</div>
-      <div class="card-desc">输入商品条码，立即查询全网最低价</div>
-      <a href="http://47.120.79.108:3006" class="btn">📷 扫码查价格</a>
-      <a href="http://47.120.79.108:3009" class="btn btn-secondary">📚 条码知识</a>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🏷️</div>
-      <div class="card-title">今日特价</div>
-      <div class="card-desc">精选优惠商品，点击直接购买</div>
-      <a href="http://47.120.79.108:3008" class="btn">🔥 查看特价商品</a>
-    </div>
-
-    <div class="card">
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-num">1000+</div>
-          <div class="stat-label">商品数据</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">5</div>
-          <div class="stat-label">电商平台</div>
-        </div>
-        <div class="stat">
-          <div class="stat-num">0</div>
-          <div class="stat-label">查询费用</div>
-        </div>
+      <div class="section-title">🔍 查询价格</div>
+      <div class="search-box">
+        <input type="text" id="barcodeInput" class="search-input" placeholder="输入条码，如 6901234567892">
+        <button class="search-btn" onclick="searchProduct()">查询</button>
+      </div>
+      <div class="result" id="resultBox">
+        <div class="loading">查询中...</div>
       </div>
     </div>
 
+    <!-- 快捷搜索 -->
     <div class="card">
-      <div class="card-title">🔥 热门查询</div>
-      <div class="hot">
-        <div class="hot-item">
-          <span>农夫山泉 饮用天然水550ml</span>
+      <div class="section-title">🔥 热门查询</div>
+      <div class="hot-list" id="hotList">
+        <div class="hot-item" onclick="quickSearch('6921168509256')">
+          <span class="hot-name">农夫山泉 饮用天然水550ml</span>
           <span class="hot-price">¥1.50</span>
         </div>
-        <div class="hot-item">
-          <span>蒙牛特仑苏纯牛奶</span>
-          <span class="hot-price">¥39.9</span>
+        <div class="hot-item" onclick="quickSearch('6901234567892')">
+          <span class="hot-name">测试商品条码</span>
+          <span class="hot-price">¥10.80</span>
         </div>
-        <div class="hot-item">
-          <span>海飞丝去屑洗发水</span>
-          <span class="hot-price">¥49.9</span>
+        <div class="hot-item" onclick="quickSearch('6902022000014')">
+          <span class="hot-name">常见食品条码</span>
+          <span class="hot-price">¥5.00</span>
         </div>
       </div>
-      <a href="http://47.120.79.108:3006" class="btn">查看全部 →</a>
     </div>
 
+    <!-- 今日特价 -->
     <div class="card">
-      <div class="card-icon">🤖</div>
-      <div class="card-title">AI 创作助手</div>
-      <div class="card-desc">AI绘画、音乐创作、语音合成</div>
-      <a href="http://47.120.79.108:8000" class="btn btn-secondary">开始创作</a>
+      <div class="section-title">🏷️ 今日特价</div>
+      <div class="deals-grid">
+        <div class="deal-item" onclick="searchKeyword('蒙牛特仑苏')">
+          <div class="deal-icon">🥛</div>
+          <div class="deal-name">蒙牛特仑苏</div>
+          <div class="deal-price">¥39.9</div>
+        </div>
+        <div class="deal-item" onclick="searchKeyword('海飞丝洗发水')">
+          <div class="deal-icon">🧴</div>
+          <div class="deal-name">海飞丝洗发水</div>
+          <div class="deal-price">¥49.9</div>
+        </div>
+        <div class="deal-item" onclick="searchKeyword('奥利奥饼干')">
+          <div class="deal-icon">🍪</div>
+          <div class="deal-name">奥利奥饼干</div>
+          <div class="deal-price">¥14.9</div>
+        </div>
+        <div class="deal-item" onclick="searchKeyword('维达抽纸')">
+          <div class="deal-icon">🧻</div>
+          <div class="deal-name">维达抽纸</div>
+          <div class="deal-price">¥39.9</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AI创作 -->
+    <div class="card">
+      <div class="section-title">🤖 AI创作助手</div>
+      <p style="color:#666;font-size:14px;margin-bottom:12px;">AI绘画、音乐创作、语音合成</p>
+      <a href="http://47.120.79.108:8000" class="deals-link">开始AI创作 →</a>
     </div>
 
     <div class="footer">
       <p>📷 扫码查价 - 让购物更省钱</p>
-      <p style="margin-top:10px;">合作平台: 京东 | 淘宝 | 拼多多 | 唯品会</p>
+      <p style="margin-top:6px;">合作平台: 京东 | 淘宝 | 拼多多 | 唯品会</p>
     </div>
   </div>
+
+  <script>
+    // 条码API地址
+    const BARCODE_API = 'http://47.120.79.108:3002/api/v1';
+
+    async function searchProduct() {
+      const barcode = document.getElementById('barcodeInput').value.trim();
+      if (!barcode) { alert('请输入条码'); return; }
+
+      const resultBox = document.getElementById('resultBox');
+      resultBox.classList.add('show');
+      resultBox.innerHTML = '<div class="loading">查询中...</div>';
+
+      try {
+        const resp = await fetch(`${BARCODE_API}/barcode/query/${barcode}`);
+        const data = await resp.json();
+
+        if (data.status === 'success' && data.data) {
+          const p = data.data;
+          const name = encodeURIComponent(p.name || '');
+          resultBox.innerHTML = `
+            <div class="product-name">${p.name || '未知商品'}</div>
+            <div class="product-info">品牌: ${p.brand || '未知'}</div>
+            <div class="product-info">规格: ${p.spec || '未知'}</div>
+            <div class="product-price">¥${p.price || '?'}</div>
+            <div class="shop-links">
+              <a href="https://search.jd.com/Search?keyword=${name}" class="shop-btn shop-jd" target="_blank">🛒 京东购买</a>
+              <a href="https://mobile.pinduoduo.com/search.html?keyword=${name}" class="shop-btn shop-pdd" target="_blank">📦 拼多多购买</a>
+              <a href="https://s.taobao.com/search?initiative_id=staobaoz&q=${name}" class="shop-btn shop-tb" target="_blank">🏪 淘宝购买</a>
+            </div>
+          `;
+        } else {
+          resultBox.innerHTML = `
+            <div class="product-name">未找到该商品</div>
+            <p style="color:#666;font-size:14px;margin-top:8px;">试试在京东搜索：</p>
+            <a href="https://search.jd.com/Search?keyword=${encodeURIComponent(barcode)}" class="shop-btn shop-jd" target="_blank" style="margin-top:12px;">🔍 京东搜索</a>
+          `;
+        }
+      } catch (e) {
+        resultBox.innerHTML = '<div class="loading">查询失败，请稍后重试</div>';
+      }
+    }
+
+    function quickSearch(barcode) {
+      document.getElementById('barcodeInput').value = barcode;
+      searchProduct();
+    }
+
+    function searchKeyword(keyword) {
+      window.open(`https://search.jd.com/Search?keyword=${encodeURIComponent(keyword)}`, '_blank');
+    }
+
+    // 回车搜索
+    document.getElementById('barcodeInput').addEventListener('keypress', e => {
+      if (e.key === 'Enter') searchProduct();
+    });
+
+    // 加载热门商品
+    async function loadHotProducts() {
+      try {
+        const resp = await fetch(`${BARCODE_API}/barcode/popular`);
+        const data = await resp.json();
+        if (data.status === 'success' && data.data) {
+          const hotHtml = data.data.slice(0, 5).map(p => `
+            <div class="hot-item" onclick="quickSearch('${p.barcode}')">
+              <span class="hot-name">${p.name}</span>
+              <span class="hot-price">¥${p.price}</span>
+            </div>
+          `).join('');
+          document.getElementById('hotList').innerHTML = hotHtml;
+        }
+      } catch (e) {}
+    }
+    loadHotProducts();
+  </script>
 </body>
 </html>
